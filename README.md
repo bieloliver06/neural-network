@@ -2,8 +2,6 @@
 
 ## **Downloading**
 
----
-
 Either clone this repo or download one of the releases.
 
 ```console repo
@@ -14,7 +12,6 @@ git clone https://github.com/notbtc2/neural-network.git
 
 ## **Running the Neural Network test**
 
----
 
 ### **1. Install an HTTP server or Go Live (VS Code)**
 
