@@ -18,7 +18,7 @@ if(localStorage.getItem("bestBrain")){
             localStorage.getItem("bestBrain")
         );
         if(i!=0){
-            NeuralNetwork.mutate(cars[i].brain,0.1);
+            NeuralNetwork.mutate(cars[i].brain,0.2);
         }
     }
 }
@@ -40,10 +40,37 @@ generateRandomTraffic();
 animate();
 
 function generateRandomTraffic() {
+    let random = 0;
+    let higher_or_lower = 0;
+    let lanes = 0;
     let lastCoord = -700;
-    for(let i=0; i<30; i++) {
-        traffic.push(new Car(road.getLaneCenter(Math.random() * 3), lastCoord - 200, 30, 50,"DUMMY",2,getRandomColor()));
-        lastCoord -= 200;
+    for(let i=0; i<50; i++) {
+        random = Math.random()*2;
+        if(random == 0) {
+            traffic.push(new Car(road.getLaneCenter(Math.random() * 3), lastCoord - 200, 30, 50,"DUMMY",2,getRandomColor()));
+            lastCoord -= 200;
+        } else {
+            lanes = Math.random()*3;
+            higher_or_lower = Math.random()*2;
+            if(lanes == 0) {
+                traffic.push(new Car(road.getLaneCenter(lanes), lastCoord - 200, 30, 50, "DUMMY", 2, getRandomColor()));
+                traffic.push(new Car(road.getLaneCenter(Math.random()*2 + 1), lastCoord - 200, 30, 50, "DUMMY", 2, getRandomColor()));
+                lastCoord -= 200;
+            } if(lanes == 1) {
+                traffic.push(new Car(road.getLaneCenter(lanes), lastCoord - 200, 30, 50, "DUMMY", 2, getRandomColor()));
+                if(higher_or_lower == 0) {
+                    traffic.push(new Car(road.getLaneCenter(lanes - 1), lastCoord - 200, 30, 50, "DUMMY", 2, getRandomColor()));
+                    lastCoord -= 200;
+                } else {
+                    traffic.push(new Car(road.getLaneCenter(lanes + 1), lastCoord - 200, 30, 50, "DUMMY", 2, getRandomColor()));
+                    lastCoord -= 200;
+                }
+            } else {
+                traffic.push(new Car(road.getLaneCenter(lanes), lastCoord - 200, 30, 50, "DUMMY", 2, getRandomColor()));
+                traffic.push(new Car(road.getLaneCenter(Math.random() * 2), lastCoord - 200, 30, 50, "DUMMY", 2, getRandomColor()));
+                lastCoord -= 200;
+            }
+        }
     }
 }
 

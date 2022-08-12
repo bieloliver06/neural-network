@@ -1,1 +1,1 @@
-# neural-network
+# Neural Network using JS
